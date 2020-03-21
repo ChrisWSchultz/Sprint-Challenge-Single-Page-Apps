@@ -1,11 +1,24 @@
 import React from "react";
+import styled from 'styled-components'
 
-export default function CharacterCard(props) {git 
+const CharCard = styled.div`
+    display: border-box;
+    background-color: #F8F8F8;
+    margin: 1rem;
+    padding: 2rem;
+`
+
+const CharImg = styled.img`
+    border-radius: 100%;
+`
+
+export default function CharacterCard(props) {
   return (
-      <div>
-        <h2>{ props.character.name }</h2>
-        <p>{ props.character.status }</p>
-        <img src={ props.character.image } />
-      </div>
+      <CharCard>
+          <h2>{ props.character.name }</h2>
+          <p>Status: { props.character.status }</p>
+          <p>Species: { props.character.species}</p>
+          <CharImg src={ props.character.image } />
+      </CharCard>
   );
 }
