@@ -28,6 +28,7 @@ export default function WelcomePage() {
                 }
             });
         });
+
         setFilteredCharacters(list);
     }
 
@@ -43,7 +44,7 @@ export default function WelcomePage() {
       </header>
 
         <SearchForm filterList={filterList} />
-        <CharacterList characters={filteredCharacters} />
+        <CharacterList characters={filteredCharacters.length > 0 ? filteredCharacters : characters} />
     </section>
   );
 }

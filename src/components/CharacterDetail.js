@@ -14,13 +14,15 @@ const CharImg = styled.img`
     border-radius: 100%;
 `
 
-export default function CharacterCard(props) {
+export default function CharacterDetail(props) {
+    let char = props.location.state.character;
+
   return (
       <CharCard>
-          <h2>{ props.character.name }</h2>
-          <p>Status: { props.character.status }</p>
-          <p>Species: { props.character.species}</p>
-          <CharImg src={ props.character.image } />
+          <h2>{ char.character.name }</h2>
+          <p>Status: { char.character.status }</p>
+          <p>Species: { char.character.species}</p>
+          <CharImg src={ char.character.image } />
       </CharCard>
   );
 }
