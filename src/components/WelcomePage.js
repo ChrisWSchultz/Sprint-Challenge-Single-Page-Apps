@@ -1,6 +1,37 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import SearchForm from "./SearchForm";
+import CharacterList from "./CharacterList";
+import Axios from "axios";
 
 export default function WelcomePage() {
+    const [ characters, setCharacters ] = useState([]);
+    const [ filteredCharacters, setFilteredCharacters ] = useState([]);
+
+    useEffect(() => {
+        Axios
+            .get("https://cors-anywhere.herokuapp.com/https://rickandmortyapi.com/api/character/")
+            .then((response) => {
+                setCharacters(response.data.results);
+            });
+
+    }, []);
+
+    function filterList(event) {
+        const list = [];
+
+        characters.map((character) => {
+            event.map((name) => {
+                if(character.name.toLowerCase().includes(name.toLowerCase())) {
+                    list.push(character);
+                    console.log(character);
+                    console.log(list);
+                }
+            });
+        });
+
+        setFilteredCharacters(list);
+    }
+
   return (
     <section className="welcome-page">
       <header>
@@ -11,6 +42,9 @@ export default function WelcomePage() {
           alt="rick"
         />
       </header>
+
+        <SearchForm filterList={filterList} />
+        <CharacterList characters={filteredCharacters.length > 0 ? filteredCharacters : characters} />
     </section>
   );
 }

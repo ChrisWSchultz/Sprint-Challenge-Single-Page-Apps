@@ -1,16 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import CharacterCard from "./CharacterCard";
+import styled from 'styled-components'
+import {Link} from "react-router-dom";
 
-export default function CharacterList() {
-  // TODO: Add useState to track data from useEffect
+const ResultsWrapper = styled.section`
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+`
 
-  useEffect(() => {
-    // TODO: Add API Request here - must run in `useEffect`
-    //  Important: verify the 2nd `useEffect` parameter: the dependancies array!
-  }, []);
-
-  return (
-    <section className="character-list">
-      <h2>TODO: `array.map()` over your state here!</h2>
-    </section>
-  );
+export default function CharacterList(props) {
+    return (
+        <ResultsWrapper className="character-list">
+          {props.characters.map((character) => {
+            return (
+                <div key={ character.id }>
+                    <Link to={{ pathname: `/character/${character.id}`, state: {character: {character}} }}>
+                        <CharacterCard character={character}/>
+                    </Link>
+                </div>
+                );
+          })}
+        </ResultsWrapper>
+    );
 }
